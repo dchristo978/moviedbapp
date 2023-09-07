@@ -1,0 +1,1 @@
+export 'screen/SplashScreen.dart';

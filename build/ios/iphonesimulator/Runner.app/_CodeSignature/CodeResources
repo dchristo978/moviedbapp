@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		09sFPHTD2+ApF9RYB6TurAy85dQ=
+		92PIcHtAWwSJRAWX7fR9q6Gl38c=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		tr5VC//yYo8C7NScoX2TbYsj1Xs=
+		83NQN/hp+6Pd+d+sjQkwkPDGVm8=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		FLXuQvDEeYmCCa9ZhMezRRAm2U8=
+		Q/DvGNE0O/oGJdCNzARABR+ickI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -210,7 +210,7 @@
 		</data>
 		<key>Frameworks/fluttertoast.framework/fluttertoast</key>
 		<data>
-		b46GCLYSkzA8I0GXj5LNyK+MhRw=
+		3NoxkoZlaOw18HDhN+7X95FxEuM=
 		</data>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
 		<data>
@@ -333,7 +333,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uXj9cN5Ey8WOHpbalv8h+CNQ2rehBOHpvEPqZruq0HM=
+			ep2hhtPyv/USJW7uHr++NswNsIo8ArgQ0MTsqZnbjwI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -347,7 +347,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yx1N4BUk7lBNqkUqkRNO7at0LUyJWO0dtg/zZWXdzdk=
+			hOU91hTqFaoYX6lq6DkBbrMuWcfw3OHglgWtnTHIi4c=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -396,7 +396,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			umXnMTGnMtljsaVpiUbZjRcqW2/Y3OuYMY9U+Z4YixU=
+			a0xs35caIG2/+yuWp6ubDaaDTZfR8KWKeZpf6uzIrtk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -620,7 +620,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			scTvA7zJIOD8g4c9X2xGS4Ntstjzl/oxgIwTOd81IP4=
+			dSag5js9s53OmPW1MRlT2M/6RyxOTXE+kHiU5oy8V+k=
 			</data>
 		</dict>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>

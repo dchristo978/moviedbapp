@@ -4,6 +4,6 @@ import 'package:moviedbapp/features/splash/controller/SplashController.dart';
 class SplashBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => SplashController());
+    Get.put(() => SplashController());
   }
 }

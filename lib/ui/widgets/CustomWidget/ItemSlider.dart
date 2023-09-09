@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moviedbapp/core/utils/FToast.dart';
 import 'package:moviedbapp/network/index.dart';
 import 'package:moviedbapp/ui/widgets/BaseText.dart';
 
@@ -29,19 +31,19 @@ class ItemSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+      onTap: () {
+        FToast().successToast('Tapped!');
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
             child: Image.network(
               Url.basePosterUrl + posterPath,
-              height: (Get.height / 4) - 100,
+              height: 300,
             ),
-          ),
-          BaseText(
-            text: title,
-            isOverflow: true,
           ),
         ],
       ),

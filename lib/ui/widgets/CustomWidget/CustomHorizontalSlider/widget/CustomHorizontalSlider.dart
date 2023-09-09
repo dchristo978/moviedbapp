@@ -20,7 +20,7 @@ class CustomHorizontalSlider extends StatelessWidget {
     final CustomHorizontalSliderController controller = Get.find(tag: type);
 
     return Container(
-      height: Get.height / 4,
+      height: 350,
       child: Column(
         children: [
           Container(

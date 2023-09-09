@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
                   CustomHorizontalSlider(type: AppStrings.upcomingTag),
                   CustomHorizontalSlider(type: AppStrings.popularTag),
                   CustomHorizontalSlider(type: AppStrings.topRatedTag),
+                  SizedBox(height: 30,),
                 ],
               ),
             ),

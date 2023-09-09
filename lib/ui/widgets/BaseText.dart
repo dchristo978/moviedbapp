@@ -25,8 +25,8 @@ class BaseText extends StatelessWidget {
   Widget build(BuildContext context) {
     String showedText = "";
 
-    if (isOverflow != null && isOverflow! && text.length > 14) {
-      showedText = '${text.substring(0, 14)}...';
+    if (isOverflow != null && isOverflow! && text.length > 18) {
+      showedText = '${text.substring(0, 18)}...';
     } else {
       showedText = text;
     }

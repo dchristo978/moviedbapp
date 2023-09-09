@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:moviedbapp/network/index.dart';
 import 'package:moviedbapp/ui/widgets/BaseText.dart';
 
 class ItemSlider extends StatelessWidget {
@@ -28,8 +30,20 @@ class ItemSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: BaseText(
-        text: title,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            child: Image.network(
+              Url.basePosterUrl + posterPath,
+              height: (Get.height / 4) - 100,
+            ),
+          ),
+          BaseText(
+            text: title,
+            isOverflow: true,
+          ),
+        ],
       ),
     );
   }

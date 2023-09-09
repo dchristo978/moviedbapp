@@ -3,6 +3,9 @@ class Url {
   static const String bearerAuthorization = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZjE5MzA2ODQ5NTkxZDVkNzljZDViNmRiZDc0ZWY0YSIsInN1YiI6IjYwOGQxMzAzNWI0ZmVkMDA1OTdiMGIxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.j59LTBSxgaZgWKqP8sHx6noG5oHWr2XyFmM0iG-OfoY";
   static const String baseUrl = 'https://api.themoviedb.org/3';
 
+  static const String baseBackdropUrl = 'https://image.tmdb.org/t/p/original';
+  static const String basePosterUrl = 'https://image.tmdb.org/t/p/w185';
+
   static const String languageENUS = '?language=en-US';
   static const String genre = '/genre/movie/list?language=en';
   static const String listMovies = '/movie';

@@ -10,6 +10,7 @@ class BaseText extends StatelessWidget {
     this.fontWeight = FontWeight.w600,
     this.onPressed,
     this.paddings = const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+    this.isOverflow,
   }) : super(key: key);
 
   final Color? textColor;
@@ -18,22 +19,30 @@ class BaseText extends StatelessWidget {
   final FontWeight? fontWeight;
   final VoidCallback? onPressed;
   final EdgeInsets? paddings;
+  final bool? isOverflow;
 
   @override
   Widget build(BuildContext context) {
+    String showedText = "";
+
+    if (isOverflow != null && isOverflow! && text.length > 14) {
+      showedText = '${text.substring(0, 14)}...';
+    } else {
+      showedText = text;
+    }
+
     return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        padding: paddings,
-        child: Text(
-          text ?? "",
-          style: TextStyle(
-            color: textColor,
-            fontWeight: fontWeight,
-            fontSize: fontSize,
+        onTap: onPressed,
+        child: Container(
+          padding: paddings,
+          child: Text(
+            showedText,
+            style: TextStyle(
+              color: textColor,
+              fontWeight: fontWeight,
+              fontSize: fontSize,
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

@@ -26,6 +26,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarBrightness: Brightness.dark,
+    ));
     return GetMaterialApp(
       title: 'Movie App',
       theme: ThemeData(

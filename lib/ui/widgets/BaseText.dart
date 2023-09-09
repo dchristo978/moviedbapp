@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
+import "package:moviedbapp/core/theme/ColorIndex.dart";
 
 class BaseText extends StatelessWidget {
   const BaseText({
     Key? key,
-    this.textColor = Colors.white,
+    this.textColor = ColorIndex.primaryText,
     required this.text,
     this.fontSize,
     this.fontWeight = FontWeight.w600,

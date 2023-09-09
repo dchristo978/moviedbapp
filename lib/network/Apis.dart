@@ -3,10 +3,18 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:moviedbapp/core/utils/FToast.dart';
 import 'package:moviedbapp/models/genre.dart';
+import 'package:moviedbapp/models/index.dart';
 import 'package:moviedbapp/network/index.dart';
 
-class Apis {
+abstract class APIsRepository {
+  Future<List<Genre>> fetchGenre();
+
+  Future<MovieWrapper?> fetchMovies(String typeParam, int page);
+}
+
+class Apis implements APIsRepository {
   static Apis? _instance;
 
   Apis._();
@@ -15,18 +23,8 @@ class Apis {
 
   final logger = Logger();
 
-  // Future<List<User>> fetchUsers() async {
-  //   var response = await Api().dio.get('/users');
-  //
-  //   List<User> listUser;
-  //
-  //   var temp = response.data as List;
-  //   listUser = temp.map((item) => User.fromJson(item)).toList();
-  //
-  //   return listUser;
-  // }
-
-  Future <List<Genre>> fetchGenre() async {
+  @override
+  Future<List<Genre>> fetchGenre() async {
     Response response = await Api().dio.get(Url.genre);
 
     List<Genre> listGenre;
@@ -37,4 +35,26 @@ class Apis {
     return listGenre;
   }
 
+  @override
+  Future<MovieWrapper?> fetchMovies(String typeParam, int page) async {
+    try {
+      String parsedUrl = Url.listMovies +
+          typeParam +
+          Url.languageENUS +
+          Url.page +
+          page.toString();
+
+      logger.i('API Called : $parsedUrl');
+
+      Response response = await Api().dio.get(parsedUrl);
+
+      return MovieWrapper.fromJson(response.data);
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Movies ' + e.toString());
+      return null;
+    }
+  }
 }

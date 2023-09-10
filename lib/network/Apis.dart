@@ -1,10 +1,7 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:moviedbapp/core/utils/FToast.dart';
-import 'package:moviedbapp/models/genre.dart';
 import 'package:moviedbapp/models/index.dart';
 import 'package:moviedbapp/network/index.dart';
 
@@ -16,6 +13,10 @@ abstract class APIsRepository {
 
   Future<MovieWrapper?> fetchMoviesByGenre(
       {required int page, required String genre});
+
+  Future<MovieDetail?> fetchMovieDetail({required String movieId});
+
+  Future<TrailerKeys?> fetchMovieKey({required String movieId});
 }
 
 class Apis implements APIsRepository {
@@ -88,6 +89,41 @@ class Apis implements APIsRepository {
       return null;
     } catch (e) {
       logger.e('Error in Fetch Movies By Genre ' + e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<MovieDetail?> fetchMovieDetail({required String movieId}) async {
+    try {
+      String parsedUrl = '${Url.listMovies}/$movieId${Url.appendVideoParam}';
+
+      Response response = await Api().dio.get(parsedUrl);
+
+      return MovieDetail.fromJson(response.data);
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Movie Detail ' + e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<TrailerKeys?> fetchMovieKey({required String movieId}) async {
+    try {
+      //http://api.themoviedb.org/3/movie/968051/videos
+      String parsedUrl = '${Url.listMovies}/$movieId${Url.videos}';
+
+      Response response = await Api().dio.get(parsedUrl);
+
+      return TrailerKeys.fromJson(response.data);
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Movie Trailer Keys ' + e.toString());
       return null;
     }
   }

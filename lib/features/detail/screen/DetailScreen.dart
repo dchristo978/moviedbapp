@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moviedbapp/core/theme/ColorIndex.dart';
 import 'package:moviedbapp/features/detail/controller/DetailController.dart';
+import 'package:moviedbapp/ui/widgets/index.dart';
 
 class DetailScreen extends StatelessWidget {
   final String movieId;
@@ -15,6 +17,16 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     DetailController controller = Get.find();
 
-    return Scaffold();
+    return Container(
+        color: ColorIndex.primary,
+        child: SafeArea(
+            bottom: false,
+            child: Scaffold(
+                appBar: AppBar(
+                  title: BaseText(
+                    text: ' Movies',
+                  ),
+                ),
+                body: Container())));
   }
 }

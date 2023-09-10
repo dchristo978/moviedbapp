@@ -6,7 +6,6 @@ import 'package:moviedbapp/core/app/strings.dart';
 import 'package:moviedbapp/features/detail/controller/DetailController.dart';
 import 'package:moviedbapp/features/splash/controller/SplashController.dart';
 import 'package:moviedbapp/models/index.dart';
-import 'package:moviedbapp/network/Apis.dart';
 import 'package:moviedbapp/ui/widgets/CustomWidget/CustomHorizontalSlider/controller/CustomHorizontalSliderController.dart';
 
 class HomeController extends GetxController {
@@ -60,7 +59,7 @@ class HomeController extends GetxController {
     isLoading.value = false;
     update();
 
-    Get.lazyPut(() => DetailController());
+    Get.put<DetailController>(DetailController(), permanent: true);
 
     super.onReady();
   }

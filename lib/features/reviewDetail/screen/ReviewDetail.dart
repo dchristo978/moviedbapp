@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:moviedbapp/core/theme/ColorIndex.dart';
 import 'package:moviedbapp/models/index.dart';
+import 'package:moviedbapp/network/index.dart';
 import 'package:moviedbapp/ui/widgets/BaseText.dart';
 
 class ReviewDetail extends StatelessWidget {
@@ -27,6 +28,10 @@ class ReviewDetail extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
+                Image.network(
+                  Url.baseBackdropUrl + movieDetail.backdropPath!,
+                  height: 250,
+                ),
                 BaseText(
                   text: movieDetail.title!,
                   fontSize: 42,

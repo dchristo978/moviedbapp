@@ -10,22 +10,26 @@ import 'package:moviedbapp/ui/widgets/CustomWidget/CustomHorizontalSlider/contro
 
 class HomeController extends GetxController {
   CustomHorizontalSliderController popularController = Get.put(
-    CustomHorizontalSliderController(AppStrings.popularTag, false),
+    CustomHorizontalSliderController(
+        AppStrings.popularTag, false, AppStrings.popularTag),
     tag: AppStrings.popularTag,
   );
 
   CustomHorizontalSliderController nowPlayingController = Get.put(
-    CustomHorizontalSliderController(AppStrings.nowPlayingTag, false),
+    CustomHorizontalSliderController(
+        AppStrings.nowPlayingTag, false, AppStrings.nowPlayingTag),
     tag: AppStrings.nowPlayingTag,
   );
 
   CustomHorizontalSliderController topRatedController = Get.put(
-    CustomHorizontalSliderController(AppStrings.topRatedTag, false),
+    CustomHorizontalSliderController(
+        AppStrings.topRatedTag, false, AppStrings.topRatedTag),
     tag: AppStrings.topRatedTag,
   );
 
   CustomHorizontalSliderController upcomingController = Get.put(
-    CustomHorizontalSliderController(AppStrings.upcomingTag, false),
+    CustomHorizontalSliderController(
+        AppStrings.upcomingTag, false, AppStrings.upcomingTag),
     tag: AppStrings.upcomingTag,
   );
 

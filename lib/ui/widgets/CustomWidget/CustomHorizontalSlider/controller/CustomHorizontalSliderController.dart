@@ -4,14 +4,16 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:moviedbapp/core/app/strings.dart';
 import 'package:moviedbapp/core/utils/FToast.dart';
+import 'package:moviedbapp/features/List/screen/ListMovies.dart';
 import 'package:moviedbapp/models/index.dart';
 import 'package:moviedbapp/network/Apis.dart';
 
 class CustomHorizontalSliderController extends GetxController {
   final String tag;
   final bool? isGenre;
+  final String title;
 
-  CustomHorizontalSliderController(this.tag, this.isGenre);
+  CustomHorizontalSliderController(this.tag, this.isGenre, this.title);
 
   RxBool isLoading = false.obs;
   var page = 0.obs;
@@ -157,7 +159,10 @@ class CustomHorizontalSliderController extends GetxController {
   }
 
   void navigateToSeeAll() {
-
+    Get.to(() => ListMovies(
+          type: tag,
+          title: title,
+        ));
   }
 
   String getUrlTagFromType(String type) {

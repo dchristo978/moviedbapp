@@ -60,7 +60,8 @@ class SplashController extends GetxController {
   Future<void> createGenresController(List<Genre> genres) async {
     for (var genre in genres) {
       Get.lazyPut(
-        () => CustomHorizontalSliderController(genre.id!.toString(), true),
+        () => CustomHorizontalSliderController(
+            genre.id!.toString(), true, genre.name!),
         tag: genre.id!.toString(),
       );
     }

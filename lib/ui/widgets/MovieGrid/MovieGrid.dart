@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:moviedbapp/features/detail/controller/DetailController.dart';
 import 'package:moviedbapp/features/detail/screen/DetailScreen.dart';
 import 'package:moviedbapp/network/url.dart';
 
@@ -34,6 +35,8 @@ class MovieGrid extends StatelessWidget {
   }
 
   void _onTap() {
-    Get.to(() => DetailScreen(movieId: movieId));
+    DetailController controller = Get.find();
+
+    controller.navigateToDetailScreen(movieId);
   }
 }

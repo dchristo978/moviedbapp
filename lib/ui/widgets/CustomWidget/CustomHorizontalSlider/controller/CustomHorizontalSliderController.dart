@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -13,16 +14,26 @@ class CustomHorizontalSliderController extends GetxController {
   CustomHorizontalSliderController(this.tag, this.isGenre);
 
   RxBool isLoading = false.obs;
-
   var page = 0.obs;
   var totalPage = 0.obs;
   List<Movie> listMovies = <Movie>[];
+  ScrollController scrollController = ScrollController();
+  bool isToastExist = false;
+
   var logger = Logger();
 
   @override
   void onInit() {
-    super.onInit();
     listMovies = [];
+    scrollController = ScrollController()..addListener(_scrollListener);
+
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    scrollController.removeListener(_scrollListener);
+    super.onClose();
   }
 
   @override
@@ -52,7 +63,17 @@ class CustomHorizontalSliderController extends GetxController {
     update();
   }
 
-  Future<void> getMovieList({String? extraParam}) async {
+  void _scrollListener() async {
+    if (scrollController.position.extentAfter < 300 && !isToastExist) {
+      isToastExist = true;
+      FToast().informationToast('Tap \'See All\' to view more of this');
+      await Future.delayed(const Duration(seconds: 5)).then((_) {
+        isToastExist = false;
+      });
+    }
+  }
+
+  Future<void> getMovieList() async {
     setLoading(true);
 
     MovieWrapper? response = await Apis()
@@ -133,6 +154,10 @@ class CustomHorizontalSliderController extends GetxController {
     addItemsIntoListMovie(tempListMovies);
 
     setLoading(false);
+  }
+
+  void navigateToSeeAll() {
+
   }
 
   String getUrlTagFromType(String type) {

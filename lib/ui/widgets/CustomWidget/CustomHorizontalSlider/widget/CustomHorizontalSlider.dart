@@ -36,9 +36,7 @@ class CustomHorizontalSlider extends StatelessWidget {
                 ),
                 BaseText(
                   text: 'See All',
-                  onPressed: () {
-                    FToast().successToast('See all');
-                  },
+                  onPressed: () => controller.navigateToSeeAll(),
                 )
               ],
             ),
@@ -53,6 +51,7 @@ class CustomHorizontalSlider extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.listMovies.length,
+                      controller: controller.scrollController,
                       itemBuilder: (_, index) {
                         return ItemSlider(
                             title: controller.listMovies[index].title!,

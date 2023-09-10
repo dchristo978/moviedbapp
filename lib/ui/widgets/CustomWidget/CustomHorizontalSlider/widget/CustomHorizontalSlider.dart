@@ -24,7 +24,7 @@ class CustomHorizontalSlider extends StatelessWidget {
     final CustomHorizontalSliderController controller = Get.find(tag: type);
 
     return Container(
-      height: 350,
+      height: 450,
       child: Column(
         children: [
           Container(
@@ -57,6 +57,8 @@ class CustomHorizontalSlider extends StatelessWidget {
                             title: controller.listMovies.value[index].title!,
                             backdropPath: controller
                                 .listMovies.value[index].backdropPath!,
+                            voteAverage: double.parse(controller
+                                .listMovies.value[index].voteAverage!),
                             posterPath:
                                 controller.listMovies.value[index].posterPath!,
                             id: controller.listMovies.value[index].id!

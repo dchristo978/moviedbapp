@@ -1,7 +1,9 @@
 import 'dart:ffi';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:moviedbapp/core/utils/FToast.dart';
 import 'package:moviedbapp/network/index.dart';
@@ -25,8 +27,8 @@ class ItemSlider extends StatelessWidget {
   final String posterPath;
   final String id;
   final String releaseDate;
-  final Float? popularity;
-  final Float? voteAverage;
+  final double? popularity;
+  final double? voteAverage;
   final Int? voteCount;
 
   @override
@@ -45,8 +47,32 @@ class ItemSlider extends StatelessWidget {
               height: 300,
             ),
           ),
+          BaseText(text: parseTitle(title)),
+          RatingBar.builder(
+            initialRating: (voteAverage! / 2),
+            minRating: 1,
+            direction: Axis.horizontal,
+            itemSize: 20,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            ignoreGestures: true,
+            onRatingUpdate: (double value) {},
+          )
         ],
       ),
     );
+  }
+
+  String parseTitle(String title) {
+    if (title.length > 21) {
+      return '${title.substring(0, 18)}...';
+    } else {
+      return title;
+    }
   }
 }

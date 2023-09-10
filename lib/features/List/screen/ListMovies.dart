@@ -52,6 +52,8 @@ class ListMovies extends StatelessWidget {
                       posterPath:
                           controller.listMovies.value[index].posterPath!,
                       id: controller.listMovies.value[index].id!.toString(),
+                      voteAverage: double.parse(
+                          controller.listMovies.value[index].voteAverage!),
                       releaseDate:
                           controller.listMovies.value[index].releaseDate!);
                 },

@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:moviedbapp/core/utils/FToast.dart';
@@ -17,6 +16,8 @@ abstract class APIsRepository {
   Future<MovieDetail?> fetchMovieDetail({required String movieId});
 
   Future<TrailerKeys?> fetchMovieKey({required String movieId});
+
+  Future<ReviewWrapper?> fetchReviews({required String movieId});
 }
 
 class Apis implements APIsRepository {
@@ -113,7 +114,6 @@ class Apis implements APIsRepository {
   @override
   Future<TrailerKeys?> fetchMovieKey({required String movieId}) async {
     try {
-      //http://api.themoviedb.org/3/movie/968051/videos
       String parsedUrl = '${Url.listMovies}/$movieId${Url.videos}';
 
       Response response = await Api().dio.get(parsedUrl);
@@ -124,6 +124,23 @@ class Apis implements APIsRepository {
       return null;
     } catch (e) {
       logger.e('Error in Fetch Movie Trailer Keys ' + e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<ReviewWrapper?> fetchReviews({required String movieId}) async {
+    try {
+      String parsedUrl = '${Url.listMovies}/$movieId${Url.reviews}';
+
+      Response response = await Api().dio.get(parsedUrl);
+
+      return ReviewWrapper.fromJson(response.data);
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Movies Review ' + e.toString());
       return null;
     }
   }

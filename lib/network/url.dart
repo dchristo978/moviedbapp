@@ -11,6 +11,7 @@ class Url {
   static const String listMovies = '/movie';
   static const String discoverMovies = '/discover/movie';
   static const String videos = '/videos';
+  static const String reviews = '/reviews';
 
   static const String genreQueryParam = '&with_genres=';
   static const String pageQueryParam = '&page=';

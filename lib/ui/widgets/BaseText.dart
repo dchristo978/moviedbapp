@@ -9,7 +9,7 @@ class BaseText extends StatelessWidget {
     this.fontSize,
     this.fontWeight = FontWeight.w600,
     this.onPressed,
-    this.paddings = const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+    this.paddings = const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
     this.isOverflow,
   }) : super(key: key);
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:moviedbapp/features/detail/controller/DetailController.dart';
 import 'package:moviedbapp/features/detail/screen/DetailScreen.dart';
 import 'package:moviedbapp/network/index.dart';
 import 'package:moviedbapp/ui/widgets/BaseText.dart';
@@ -34,12 +35,11 @@ class ItemSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var logger = Logger();
+    DetailController detailController = Get.find();
 
     return InkWell(
       onTap: () {
-        logger.i('Navigate to : ' + id);
-        Get.to(DetailScreen(movieId: id));
+        detailController.navigateToDetailScreen(id);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,

@@ -10,7 +10,9 @@ class Url {
   static const String genre = '/genre/movie/list?language=en';
   static const String listMovies = '/movie';
   static const String discoverMovies = '/discover/movie';
-  
+  static const String videos = '/videos';
+
   static const String genreQueryParam = '&with_genres=';
   static const String pageQueryParam = '&page=';
+  static const String appendVideoParam = '&append_to_response=videos';
 }

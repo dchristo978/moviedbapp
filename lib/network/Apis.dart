@@ -9,7 +9,7 @@ import 'package:moviedbapp/models/index.dart';
 import 'package:moviedbapp/network/index.dart';
 
 abstract class APIsRepository {
-  Future<List<Genre>> fetchGenre();
+  Future<List<Genre>?> fetchGenre();
 
   Future<MovieWrapper?> fetchMovies(String typeParam, int page);
 }
@@ -24,15 +24,23 @@ class Apis implements APIsRepository {
   final logger = Logger();
 
   @override
-  Future<List<Genre>> fetchGenre() async {
-    Response response = await Api().dio.get(Url.genre);
+  Future<List<Genre>?> fetchGenre() async {
+    try {
+      Response response = await Api().dio.get(Url.genre);
 
-    List<Genre> listGenre;
+      List<Genre> listGenre;
 
-    var temp = response.data as List;
-    listGenre = temp.map((item) => Genre.fromJson(item)).toList();
+      var temp = response.data['genres'] as List;
+      listGenre = temp.map((item) => Genre.fromJson(item)).toList();
 
-    return listGenre;
+      return listGenre;
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Genre ' + e.toString());
+      return null;
+    }
   }
 
   @override
@@ -43,8 +51,6 @@ class Apis implements APIsRepository {
           Url.languageENUS +
           Url.page +
           page.toString();
-
-      logger.i('API Called : $parsedUrl');
 
       Response response = await Api().dio.get(parsedUrl);
 

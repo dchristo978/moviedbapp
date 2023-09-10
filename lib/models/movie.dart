@@ -11,14 +11,18 @@ class MovieWrapper extends Equatable {
     this.results,
   });
 
-  factory MovieWrapper.fromRawJson(String str) => MovieWrapper.fromJson(json.decode(str));
+  factory MovieWrapper.fromRawJson(String str) =>
+      MovieWrapper.fromJson(json.decode(str));
 
   factory MovieWrapper.fromJson(Map<String?, dynamic> json) {
     return MovieWrapper(
       page: json['page'],
       totalResults: json['total_results'],
       totalPages: json['total_pages'],
-      results: json["results"] == null ? null : List<Movie>.from(json["results"].map((dynamic x) => Movie.fromJson(x))),
+      results: json["results"] == null
+          ? null
+          : List<Movie>.from(
+              json["results"].map((dynamic x) => Movie.fromJson(x))),
     );
   }
 
@@ -47,7 +51,7 @@ class Movie extends Equatable {
     this.backdropPath,
     this.originalLanguage,
     this.originalTitle,
-    this.genre_ids,
+    this.genreIds,
     this.title,
     this.voteAverage,
     this.overview,
@@ -56,7 +60,8 @@ class Movie extends Equatable {
 
   factory Movie.fromJson(Map<String?, dynamic> json) {
     return Movie(
-      popularity: json['popularity'] == null ? 0.0 : json['popularity'].toDouble(),
+      popularity:
+          json['popularity'] == null ? 0.0 : json['popularity'].toDouble(),
       voteCount: json['vote_count'],
       video: json['video'],
       posterPath: json['poster_path'],
@@ -65,7 +70,8 @@ class Movie extends Equatable {
       backdropPath: json['backdrop_path'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
-      genre_ids: json["genre_ids"] == null ? null : json['genre_ids'].cast<int>(),
+      genreIds:
+          json["genre_ids"] == null ? null : json['genre_ids'].cast<int>(),
       title: json['title'],
       voteAverage: json['vote_average'].toString(),
       overview: json['overview'],
@@ -82,7 +88,7 @@ class Movie extends Equatable {
   final String? backdropPath;
   final String? originalLanguage;
   final String? originalTitle;
-  final List<int>? genre_ids;
+  final List<int>? genreIds;
   final String? title;
   final String? voteAverage;
   final String? overview;
@@ -95,7 +101,7 @@ class Movie extends Equatable {
         "adult": adult,
         "overview": overview,
         "release_date": releaseDate,
-        "genres": genre_ids,
+        "genre_ids": genreIds,
         "id": id,
         "original_title": originalTitle,
         "original_language": originalLanguage,
@@ -118,10 +124,29 @@ class Movie extends Equatable {
         backdropPath,
         originalLanguage,
         originalTitle,
-        genre_ids,
+        genreIds,
         title,
         voteAverage,
         overview,
         releaseDate,
       ];
+
+  bool checkIfAnyIsNull() {
+    return [
+      popularity,
+      voteCount,
+      video,
+      posterPath,
+      id,
+      adult,
+      backdropPath,
+      originalLanguage,
+      originalTitle,
+      genreIds,
+      title,
+      voteAverage,
+      overview,
+      releaseDate
+    ].contains(null);
+  }
 }

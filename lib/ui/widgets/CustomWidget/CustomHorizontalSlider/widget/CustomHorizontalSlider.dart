@@ -11,9 +11,13 @@ class CustomHorizontalSlider extends StatelessWidget {
   const CustomHorizontalSlider({
     Key? key,
     required this.type,
+    this.isGenre,
+    required this.title,
   }) : super(key: key);
 
   final String type;
+  final String title;
+  final bool? isGenre;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class CustomHorizontalSlider extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BaseText(
-                  text: type,
+                  text: title,
                 ),
                 BaseText(
                   text: 'See All',

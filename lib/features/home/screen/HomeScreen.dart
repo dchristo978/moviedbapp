@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: ColorIndex.primary,
             body: SingleChildScrollView(
+              controller: controller.scrollController,
               child: Column(
                 children: [
                   const CustomHorizontalSlider(
@@ -44,24 +45,20 @@ class HomeScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Obx(
-                    () => controller.isLoading.value
-                        ? const CupertinoActivityIndicator(
-                            color: ColorIndex.primaryText,
-                          )
-                        : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: controller.listGenre.length,
-                            itemBuilder: (_, index) {
-                              return CustomHorizontalSlider(
-                                type:
-                                    controller.listGenre[index].id!.toString(),
-                                title: controller.listGenre[index].name!,
-                                isGenre: true,
-                              );
-                            },
-                          ),
+                    () => ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: controller.listGenreLength.value,
+                      itemBuilder: (_, index) {
+                        return CustomHorizontalSlider(
+                          type:
+                              controller.listGenre.value[index].id!.toString(),
+                          title: controller.listGenre.value[index].name!,
+                          isGenre: true,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

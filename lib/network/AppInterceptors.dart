@@ -11,7 +11,7 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    logger.i('API Called : ${options.path}');
+    logger.i('API Called : ${options.baseUrl + options.path}');
 
     super.onRequest(options, handler);
   }

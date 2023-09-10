@@ -9,5 +9,8 @@ class Url {
   static const String languageENUS = '?language=en-US';
   static const String genre = '/genre/movie/list?language=en';
   static const String listMovies = '/movie';
-  static const String page = '&page=';
+  static const String discoverMovies = '/discover/movie';
+  
+  static const String genreQueryParam = '&with_genres=';
+  static const String pageQueryParam = '&page=';
 }

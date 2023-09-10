@@ -8,8 +8,9 @@ import 'package:moviedbapp/network/Apis.dart';
 
 class CustomHorizontalSliderController extends GetxController {
   final String tag;
+  final bool? isGenre;
 
-  CustomHorizontalSliderController(this.tag);
+  CustomHorizontalSliderController(this.tag, this.isGenre);
 
   RxBool isLoading = false.obs;
 
@@ -27,33 +28,109 @@ class CustomHorizontalSliderController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    getMovieList();
+    if (!isGenre!) {
+      getMovieList();
+    } else {
+      populateListFromExistedData();
+      getMovieListByGenre(genreId: tag.toString());
+    }
   }
 
   void setLoading(bool loading) {
     if (loading) {
       isLoading.value = true;
-      EasyLoading.show();
       update();
     } else {
       isLoading.value = false;
-      EasyLoading.dismiss();
       update();
     }
   }
 
-  Future<void> getMovieList() async {
+  void addItemsIntoListMovie(List<Movie> data) {
+    data.removeWhere((element) => element.checkIfAnyIsNull());
+    listMovies.addAll(data);
+    update();
+  }
+
+  Future<void> getMovieList({String? extraParam}) async {
     setLoading(true);
 
-    MovieWrapper? response =
-        await Apis().fetchMovies(getUrlTagFromType(tag), page.value + 1);
+    MovieWrapper? response = await Apis()
+        .fetchMovies(typeParam: getUrlTagFromType(tag), page: page.value + 1);
 
     if (response != null) {
       page.value = response.page!;
       totalPage.value = response.totalPages!;
-      listMovies.addAll(response.results as Iterable<Movie>);
-      update();
+
+      addItemsIntoListMovie(response.results as List<Movie>);
     }
+
+    setLoading(false);
+  }
+
+  Future<void> getMovieListByGenre({String? genreId}) async {
+    setLoading(true);
+
+    MovieWrapper? response =
+        await Apis().fetchMoviesByGenre(page: page.value + 1, genre: tag);
+
+    if (response != null) {
+      page.value = response.page!;
+      totalPage.value = response.totalPages!;
+      addItemsIntoListMovie(response.results as List<Movie>);
+    }
+
+    setLoading(false);
+  }
+
+  Future<void> populateListFromExistedData() async {
+    List<Movie> tempListMovies = <Movie>[];
+    setLoading(true);
+
+    List<CustomHorizontalSliderController> listController =
+        <CustomHorizontalSliderController>[];
+
+    CustomHorizontalSliderController popularController =
+        Get.find(tag: AppStrings.popularTag);
+    listController.add(popularController);
+
+    CustomHorizontalSliderController topRatedController =
+        Get.find(tag: AppStrings.topRatedTag);
+    listController.add(topRatedController);
+
+    CustomHorizontalSliderController upcomingController =
+        Get.find(tag: AppStrings.upcomingTag);
+    listController.add(upcomingController);
+
+    CustomHorizontalSliderController nowPlayingController =
+        Get.find(tag: AppStrings.nowPlayingTag);
+    listController.add(nowPlayingController);
+
+    for (var controller in listController) {
+      // Looped for every Controller
+      for (var movie in controller.listMovies) {
+        // Looped for every Movie in each controller
+        movie.genreIds?.forEach((genreId) {
+          // Looped of every Genre ID exist in each Movie
+          if (genreId.toString() == tag) {
+            // Check if Genre ID is Equal Controller Tag
+            bool alreadyExist = false;
+            for (var savedMovie in tempListMovies) {
+              // Looped for every temporary saved list of movies for this controller
+              if (savedMovie.id == movie.id) {
+                alreadyExist = true;
+                break;
+              }
+            }
+            if (!alreadyExist) {
+              tempListMovies.add(movie);
+            }
+          }
+        });
+      }
+    }
+
+    addItemsIntoListMovie(tempListMovies);
 
     setLoading(false);
   }

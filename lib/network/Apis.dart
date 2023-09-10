@@ -11,7 +11,11 @@ import 'package:moviedbapp/network/index.dart';
 abstract class APIsRepository {
   Future<List<Genre>?> fetchGenre();
 
-  Future<MovieWrapper?> fetchMovies(String typeParam, int page);
+  Future<MovieWrapper?> fetchMovies(
+      {required String typeParam, required int page});
+
+  Future<MovieWrapper?> fetchMoviesByGenre(
+      {required int page, required String genre});
 }
 
 class Apis implements APIsRepository {
@@ -44,12 +48,13 @@ class Apis implements APIsRepository {
   }
 
   @override
-  Future<MovieWrapper?> fetchMovies(String typeParam, int page) async {
+  Future<MovieWrapper?> fetchMovies(
+      {required String typeParam, required int page}) async {
     try {
       String parsedUrl = Url.listMovies +
           typeParam +
           Url.languageENUS +
-          Url.page +
+          Url.pageQueryParam +
           page.toString();
 
       Response response = await Api().dio.get(parsedUrl);
@@ -60,6 +65,29 @@ class Apis implements APIsRepository {
       return null;
     } catch (e) {
       logger.e('Error in Fetch Movies ' + e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<MovieWrapper?> fetchMoviesByGenre(
+      {required int page, required String genre}) async {
+    try {
+      String parsedUrl = Url.discoverMovies +
+          Url.languageENUS +
+          Url.pageQueryParam +
+          page.toString() +
+          Url.genreQueryParam +
+          genre;
+
+      Response response = await Api().dio.get(parsedUrl);
+
+      return MovieWrapper.fromJson(response.data);
+    } on DioException catch (e) {
+      FToast().errorToast(e.message!);
+      return null;
+    } catch (e) {
+      logger.e('Error in Fetch Movies By Genre ' + e.toString());
       return null;
     }
   }

@@ -1,10 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:moviedbapp/core/utils/FToast.dart';
 
 class AppInterceptors extends Interceptor {
   final Dio dio;
 
   AppInterceptors(this.dio);
+
+  var logger = Logger();
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    logger.i('API Called : ${options.path}');
+
+    super.onRequest(options, handler);
+  }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {

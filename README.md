@@ -1,16 +1,35 @@
 # moviedbapp
 
-A new Flutter project.
+A Flutter project implementing [The Movie Database API](https://www.themoviedb.org/).
+Using latest Flutter Version : [3.13.3](https://docs.flutter.dev/release/archive?tab=macos)
 
-## Getting Started
+## Used Package : 
 
-This project is a starting point for a Flutter application.
+State Management using [GetX](https://pub.dev/packages/get)
 
-A few resources to get you started if this is your first Flutter project:
+API Fetcher using [Dio](https://pub.dev/packages/dio)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Logging for Debug using [Logger](https://pub.dev/packages/logger)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Rating Bar using [Flutter Rating Bar](flutter_rating_bar)
+
+## Project Structure : 
+````
+|--Core
+|  |--app
+|  |--theme
+|  |--utils
+|--features
+|  |--list
+|  |--detail
+|  |--reviewDetail
+|  |--home
+|  |--splash
+|--model
+|--network
+|--routes
+|--UI
+|  |--Widget
+|     |--CustomWidget
+
+

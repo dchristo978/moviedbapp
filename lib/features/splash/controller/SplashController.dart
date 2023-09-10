@@ -29,11 +29,9 @@ class SplashController extends GetxController {
   void setLoading(bool loading) {
     if (loading) {
       isLoading.value = true;
-      EasyLoading.show();
       update();
     } else {
       isLoading.value = false;
-      EasyLoading.dismiss();
       update();
     }
   }

@@ -50,18 +50,19 @@ class CustomHorizontalSlider extends StatelessWidget {
                   : ListView.builder(
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: controller.listMovies.length,
+                      itemCount: controller.listMovies.value.length,
                       controller: controller.scrollController,
                       itemBuilder: (_, index) {
                         return ItemSlider(
-                            title: controller.listMovies[index].title!,
-                            backdropPath:
-                                controller.listMovies[index].backdropPath!,
+                            title: controller.listMovies.value[index].title!,
+                            backdropPath: controller
+                                .listMovies.value[index].backdropPath!,
                             posterPath:
-                                controller.listMovies[index].posterPath!,
-                            id: controller.listMovies[index].id!.toString(),
-                            releaseDate:
-                                controller.listMovies[index].releaseDate!);
+                                controller.listMovies.value[index].posterPath!,
+                            id: controller.listMovies.value[index].id!
+                                .toString(),
+                            releaseDate: controller
+                                .listMovies.value[index].releaseDate!);
                       },
                     ),
             ),

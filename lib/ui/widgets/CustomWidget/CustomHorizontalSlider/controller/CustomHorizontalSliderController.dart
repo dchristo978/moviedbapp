@@ -18,16 +18,19 @@ class CustomHorizontalSliderController extends GetxController {
   RxBool isLoading = false.obs;
   var page = 0.obs;
   var totalPage = 0.obs;
-  List<Movie> listMovies = <Movie>[];
+  var listMovies = <Movie>[].obs;
   ScrollController scrollController = ScrollController();
+  ScrollController stagScrollController = ScrollController();
   bool isToastExist = false;
 
   var logger = Logger();
 
   @override
   void onInit() {
-    listMovies = [];
+    listMovies.value = [];
     scrollController = ScrollController()..addListener(_scrollListener);
+    stagScrollController = ScrollController()
+      ..addListener(_stagScrollController);
 
     super.onInit();
   }
@@ -35,6 +38,7 @@ class CustomHorizontalSliderController extends GetxController {
   @override
   void onClose() {
     scrollController.removeListener(_scrollListener);
+    stagScrollController.removeListener(_stagScrollController);
     super.onClose();
   }
 
@@ -61,8 +65,12 @@ class CustomHorizontalSliderController extends GetxController {
 
   void addItemsIntoListMovie(List<Movie> data) {
     data.removeWhere((element) => element.checkIfAnyIsNull());
-    listMovies.addAll(data);
+    listMovies.value.addAll(data);
     update();
+
+    listMovies.refresh();
+
+    if (EasyLoading.isShow) EasyLoading.dismiss();
   }
 
   void _scrollListener() async {
@@ -72,6 +80,17 @@ class CustomHorizontalSliderController extends GetxController {
       await Future.delayed(const Duration(seconds: 5)).then((_) {
         isToastExist = false;
       });
+    }
+  }
+
+  void _stagScrollController() async {
+    if (stagScrollController.position.extentAfter < 300 && !isLoading.value) {
+      EasyLoading.show();
+      if (!isGenre!) {
+        getMovieList();
+      } else {
+        getMovieListByGenre(genreId: tag.toString());
+      }
     }
   }
 
@@ -131,7 +150,7 @@ class CustomHorizontalSliderController extends GetxController {
 
     for (var controller in listController) {
       // Looped for every Controller
-      for (var movie in controller.listMovies) {
+      for (var movie in controller.listMovies.value) {
         // Looped for every Movie in each controller
         movie.genreIds?.forEach((genreId) {
           // Looped of every Genre ID exist in each Movie

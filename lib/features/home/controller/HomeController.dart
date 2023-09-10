@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:moviedbapp/core/app/strings.dart';
+import 'package:moviedbapp/features/detail/controller/DetailController.dart';
 import 'package:moviedbapp/features/splash/controller/SplashController.dart';
 import 'package:moviedbapp/models/index.dart';
 import 'package:moviedbapp/network/Apis.dart';
@@ -58,6 +59,9 @@ class HomeController extends GetxController {
     listGenre.value = splashController.listGenre.sublist(0, 3);
     isLoading.value = false;
     update();
+
+    Get.lazyPut(() => DetailController());
+
     super.onReady();
   }
 

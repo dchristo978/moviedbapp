@@ -13,18 +13,56 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: ColorIndex.primary,
-      child: const SafeArea(
+      child: SafeArea(
           bottom: false,
           child: Scaffold(
             backgroundColor: ColorIndex.primary,
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  CustomHorizontalSlider(type: AppStrings.nowPlayingTag),
-                  CustomHorizontalSlider(type: AppStrings.upcomingTag),
-                  CustomHorizontalSlider(type: AppStrings.popularTag),
-                  CustomHorizontalSlider(type: AppStrings.topRatedTag),
-                  SizedBox(height: 30,),
+                  const CustomHorizontalSlider(
+                    type: AppStrings.nowPlayingTag,
+                    title: AppStrings.nowPlayingTag,
+                    isGenre: false,
+                  ),
+                  const CustomHorizontalSlider(
+                    type: AppStrings.upcomingTag,
+                    title: AppStrings.upcomingTag,
+                    isGenre: false,
+                  ),
+                  const CustomHorizontalSlider(
+                    type: AppStrings.popularTag,
+                    title: AppStrings.popularTag,
+                    isGenre: false,
+                  ),
+                  const CustomHorizontalSlider(
+                    type: AppStrings.topRatedTag,
+                    title: AppStrings.topRatedTag,
+                    isGenre: false,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Obx(
+                    () => controller.isLoading.value
+                        ? const CupertinoActivityIndicator(
+                            color: ColorIndex.primaryText,
+                          )
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: controller.listGenre.length,
+                            itemBuilder: (_, index) {
+                              return CustomHorizontalSlider(
+                                type:
+                                    controller.listGenre[index].id!.toString(),
+                                title: controller.listGenre[index].name!,
+                                isGenre: true,
+                              );
+                            },
+                          ),
+                  ),
                 ],
               ),
             ),

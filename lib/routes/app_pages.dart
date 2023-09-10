@@ -11,26 +11,5 @@ class AppPages {
       binding: SplashBinding(),
       preventDuplicates: true,
     ),
-    // GetPage<HomeMovieScreen>(
-    //   name: AppRoutes.HOME_MOVIE,
-    //   page: () => const HomeMovieScreen(),
-    //   transition: Transition.fadeIn,
-    //   binding: HomeMovieBinding(),
-    //   preventDuplicates: true,
-    // ),
-    // GetPage<HomeTvScreen>(
-    //   name: AppRoutes.HOME_TV,
-    //   page: () => const HomeTvScreen(),
-    //   transition: Transition.fadeIn,
-    //   binding: HomeTvBinding(),
-    //   preventDuplicates: true,
-    // ),
-    // GetPage<DetailScreen>(
-    //   name: AppRoutes.DETAIL,
-    //   page: () => const DetailScreen(),
-    //   transition: Transition.fadeIn,
-    //   binding: DetailPageBinding(),
-    //   preventDuplicates: true,
-    // ),
   ];
 }
